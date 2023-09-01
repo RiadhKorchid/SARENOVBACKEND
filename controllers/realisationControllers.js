@@ -30,11 +30,11 @@ export async function addRealisation(req, res) {
 }
 
 export async function deleteRealisation(req, res) {
-  const { realisationId } = req.params; // Assuming you pass the realisation ID as a URL parameter
-
+  const { realisationID } = req.params; // Assuming you pass the realisation ID as a URL parameter
+  console.log(realisationID)
   try {
     // Find the realisation by ID and remove it
-    const deletedRealisation = await Realisation.findByIdAndRemove(realisationId);
+    const deletedRealisation = await Realisation.findByIdAndRemove(realisationID);
 
     if (!deletedRealisation) {
       return res.status(404).json({ error: "Realisation not found" });

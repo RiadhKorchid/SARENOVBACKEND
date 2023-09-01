@@ -10,4 +10,4 @@ const RealisationSchema = mongoose.Schema({
         type:String
     }
 }) 
-export default mongoose.model("Realistion",RealisationSchema)
+export default mongoose.model("Realistions",RealisationSchema)
