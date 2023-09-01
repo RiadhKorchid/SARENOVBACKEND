@@ -1,5 +1,5 @@
 import express from "express"
-import Client from "../models/client.js"
+import Admin from "../models/Admin.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 export async function signIn(req, res) {
@@ -7,7 +7,7 @@ export async function signIn(req, res) {
   
       try {
         // Fetch super admin user from your database (replace with actual code)
-        const existe = await Client.findOne({ email: email });
+        const existe = await Admin.findOne({ email: email });
   
         if (!existe) {
           return res.status(401).json({
@@ -23,8 +23,6 @@ export async function signIn(req, res) {
           const accessToken = generateToken({
             name: existe.name,
             email: existe.email,
-            phone: existe.phone,
-            adresse: existe.adresse,
           });
   
           return res.status(200).json({
@@ -33,7 +31,6 @@ export async function signIn(req, res) {
             user: {
               name: existe.name,
               email: existe.email,
-              // Add other user properties here as needed
             },
           });
         } else {
