@@ -46,3 +46,23 @@ export async function deleteRealisation(req, res) {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+export async function updateRealisation(req, res) {
+  const { realisationID } = req.params;
+  const updateData = req.body;
+
+  try {
+    const updatedRealisation = await Realisation.findByIdAndUpdate(realisationID, updateData, {
+      new: true,
+    });
+
+    if (!updatedRealisation) {
+      return res.status(404).json({ message: 'Realisation not found' });
+    }
+
+    res.status(200).json(updatedRealisation);
+  } catch (error) {
+    console.error('Error updating realisation:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
