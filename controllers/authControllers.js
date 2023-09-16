@@ -7,7 +7,6 @@ import Admin from "../models/Admin.js"
 export async function logInAdmin(req, res) {
   const { email, password } = req.body;
   
-console.log("hello")
   try {
     // Fetch super admin user from your database (replace with actual code)
         const existe = await Admin.findOne({ email: email });

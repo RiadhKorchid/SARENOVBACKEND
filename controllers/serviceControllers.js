@@ -19,7 +19,6 @@ export const addService = async (req, res) => {
   }
 };
 export const getAllServices = async (req, res) => {
-  console.log("hello")
   try {
     const services = await Service.find();
     res.json(services);
