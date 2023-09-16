@@ -1,15 +1,14 @@
 // Controller to add a new service
 import Service from "../models/Service.js";
 export const addService = async (req, res) => {
-  const { name, description, time, price, imagePublicId } = req.body;
-
+  const { name, description, time, price } = req.body;
   try {
     const newService = new Service({
       name,
       description,
       time,
       price,
-      imagePublicId,
+      image: req.file ? req.file.originalname : null
     });
 
     const savedService = await newService.save();
@@ -49,9 +48,11 @@ export const deleteService = async (req, res) => {
 };
 
 export const getServiceById = async (req, res) => {
-  const { serviceId } = req.params;
+  const serviceId  = req.params.id;
+  console.log(serviceId)
   try {
     const service = await Service.findById(serviceId)
+    console.log(service)
     if (service) {
       res.status(200).json(service)
     }
@@ -65,7 +66,7 @@ export const updateService = async (req, res) => {
 
   try {
     const updatedService = await Service.findByIdAndUpdate(serviceId, updateData, {
-      new: true, 
+      new: true,
     });
 
     if (!updatedService) {

@@ -18,7 +18,7 @@ const serviceSchema = new mongoose.Schema({
     {
         type: Number
     },
-    imagePublicId:{
+    image:{
         type:String
     }
 

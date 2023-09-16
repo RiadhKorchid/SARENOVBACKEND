@@ -13,14 +13,14 @@ export async function getAllRealisation(req, res) {
 
 export async function addRealisation(req, res) {
   try {
-    const { title, description, image } = req.body;
-
+    const { title, description} = req.body;
+    const image = req.file.originalname
+    console.log(image)
     const newRealisation = new Realisation({
       title,
       description,
       image,
     });
-
     const savedRealisation = await newRealisation.save();
     return res.status(201).json(savedRealisation);
   } catch (error) {
